@@ -7,6 +7,8 @@ const raw = fs.readFileSync("./input.txt", "utf-8", (err, data) => {
 });
 // ----------------------------------------------------
 
+console.log("## PART 1 ###########################");
+
 // count the number of times a depth measurement increases
 // from the previous measurement
 
@@ -16,25 +18,39 @@ const raw = fs.readFileSync("./input.txt", "utf-8", (err, data) => {
 208 (increased)
 210 (increased)
 200 (decreased)
-207 (increased)
-240 (increased)
-269 (increased)
-260 (decreased)
-263 (increased)
  */
 
 let input = raw.split("\n").map((i) => parseInt(i));
 
-let count = 0;
-input.forEach((v, i) => {
-  const cur = input[i];
-  const next = input[i + 1];
-  if (next > cur) {
-    count++;
-  }
-});
+const countIncs = (arr) => {
+  let count = 0;
+  arr.forEach((v, i) => {
+    const cur = arr[i];
+    const next = arr[i + 1];
+    if (next > cur) {
+      count++;
+    }
+  });
+  return count;
+};
 
-console.log("## PART 1 ###########################");
-console.log("Increases: ", count);
+console.log("Increases: ", countIncs(input));
 
 console.log("## PART 2 ###########################");
+
+// PART 1
+
+// count thenumber of times the sum of measurements in a
+// three-measurement sliding window increases
+
+const slidingSums = [];
+
+input.forEach((v, i) => {
+  const vals = [v, input[i + 1], input[i + 2]];
+  if (vals[2] == undefined) {
+    return;
+  }
+  slidingSums.push(vals.reduce((a, b) => a + b));
+});
+
+console.log("Increases: ", countIncs(slidingSums));
