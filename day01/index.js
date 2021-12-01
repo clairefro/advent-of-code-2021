@@ -24,8 +24,7 @@ let input = raw.split("\n").map((i) => parseInt(i));
 
 const countIncs = (arr) => {
   let count = 0;
-  arr.forEach((v, i) => {
-    const cur = arr[i];
+  arr.forEach((cur, i) => {
     const next = arr[i + 1];
     if (next > cur) {
       count++;
@@ -45,8 +44,8 @@ console.log("## PART 2 ###########################");
 
 const slidingSums = [];
 
-input.forEach((v, i) => {
-  const vals = [v, input[i + 1], input[i + 2]];
+input.forEach((cur, i) => {
+  const vals = [cur, input[i + 1], input[i + 2]];
   if (vals[2] == undefined) {
     return;
   }
