@@ -27,7 +27,6 @@ class Tracker {
   };
 
   track([op, n]) {
-    // console.log({ op, n });
     const fn = this.ops[op];
     if (!fn) {
       console.warn(`No op found for '${op}'`);
@@ -66,7 +65,6 @@ class AimTracker {
   };
 
   track([op, n]) {
-    // console.log({ op, n });
     const fn = this.ops[op];
     if (!fn) {
       console.warn(`No op found for '${op}'`);
