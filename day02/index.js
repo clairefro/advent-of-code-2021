@@ -16,7 +16,7 @@ let input = raw
   .map((i) => i.split(" "))
   .map((i) => [i[0], parseInt(i[1])]);
 
-class Tracker {
+class BasicTracker {
   horizontal = 0;
   depth = 0;
 
@@ -42,7 +42,7 @@ class Tracker {
   }
 }
 
-const pt1 = new Tracker();
+const pt1 = new BasicTracker();
 
 input.forEach((i) => {
   pt1.track(i);
