@@ -21,9 +21,15 @@ class Tracker {
   depth = 0;
 
   ops = {
-    forward: (n) => (this.horizontal += n),
-    down: (n) => (this.depth += n),
-    up: (n) => (this.depth -= n),
+    forward: (n) => {
+      this.horizontal += n;
+    },
+    down: (n) => {
+      this.depth += n;
+    },
+    up: (n) => {
+      this.depth -= n;
+    },
   };
 
   track([op, n]) {
@@ -60,8 +66,12 @@ class AimTracker {
       this.horizontal += n;
       this.depth += n * this.aim;
     },
-    down: (n) => (this.aim += n),
-    up: (n) => (this.aim -= n),
+    down: (n) => {
+      this.aim += n;
+    },
+    up: (n) => {
+      this.aim -= n;
+    },
   };
 
   track([op, n]) {
