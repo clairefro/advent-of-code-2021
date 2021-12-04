@@ -88,15 +88,15 @@ const gammaToEpsilon = (gamma) => {
   return epsilon;
 };
 
-// const gamma = getGamma(inputs);
-// const epsilon = gammaToEpsilon(gamma);
+const gamma = getGamma(inputs);
+const epsilon = gammaToEpsilon(gamma);
 
-// const gammaDec = bToDec(gamma);
-// const epsilonDec = bToDec(epsilon);
+const gammaDec = bToDec(gamma);
+const epsilonDec = bToDec(epsilon);
 
-// console.log("gamma", gammaDec);
-// console.log("epsilon", epsilonDec);
-// console.log("power", gammaDec * epsilonDec);
+console.log("gamma", gammaDec);
+console.log("epsilon", epsilonDec);
+console.log("power", gammaDec * epsilonDec);
 
 console.log("## PART 2 #########################");
 
