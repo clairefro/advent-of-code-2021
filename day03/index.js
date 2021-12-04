@@ -31,7 +31,6 @@ const mode = (arr, trump) => {
     return trump;
   }
   const sorted = entries.sort((a, b) => b[1] - a[1]);
-  console.log({ sorted });
   const maxFreqKey = sorted[0][0];
   return maxFreqKey;
 };
@@ -47,13 +46,10 @@ const reverseMode = (arr, trump = "1") => {
     }
   }
   const entries = Object.entries(map);
-  // if (entries.every((k, v) => v === Object.values(map)[0])) {
   if (map[0] === map[1]) {
-    console.log("entered trump");
     return trump;
   }
   const sorted = entries.sort((a, b) => a[1] - b[1]);
-  console.log({ sorted });
   const minFreqKey = sorted[0][0];
   return minFreqKey;
 };
