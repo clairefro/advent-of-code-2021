@@ -27,11 +27,11 @@ const mode = (arr, trump) => {
     }
   }
   const entries = Object.entries(map);
-  if (entries.every((k, v) => v === Object.values(map)[0])) {
+  if (map[0] === map[1]) {
     return trump;
   }
-  console.log({ entries });
   const sorted = entries.sort((a, b) => b[1] - a[1]);
+  console.log({ sorted });
   const maxFreqKey = sorted[0][0];
   return maxFreqKey;
 };
@@ -47,13 +47,14 @@ const reverseMode = (arr, trump = "1") => {
     }
   }
   const entries = Object.entries(map);
-  console.log({ entries });
-  if (entries.every((k, v) => v === Object.values(map)[0])) {
+  // if (entries.every((k, v) => v === Object.values(map)[0])) {
+  if (map[0] === map[1]) {
+    console.log("entered trump");
     return trump;
   }
   const sorted = entries.sort((a, b) => a[1] - b[1]);
+  console.log({ sorted });
   const minFreqKey = sorted[0][0];
-  console.log({ minFreqKey });
   return minFreqKey;
 };
 
@@ -100,20 +101,18 @@ const gammaToEpsilon = (gamma) => {
 console.log("## PART 2 #########################");
 
 const filterByMode = (_inputs, modeFn, trump = "1") => {
-  // assuming all inputs have same # of digits
-  const numDigits = _inputs[0].split("").length;
   let validInputs = [..._inputs];
 
-  for (let i = 0; i < numDigits; i++) {
+  // assuming all inputs have same # of digits
+  inputs[0].split("").forEach((_digit, i) => {
     const bitsArr = getBits(validInputs, i);
     const filter = modeFn(bitsArr, trump);
-    console.log({ filter });
     validInputs = validInputs.filter((input) => {
       return input[i] === filter;
     });
-  }
+  });
+
   const binary = validInputs[0];
-  console.log({ binary });
   return bToDec(binary);
 };
 
