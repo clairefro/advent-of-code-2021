@@ -25,33 +25,20 @@ class CrabOrchestrator {
 
   constructor(_positions, _fuelReducer) {
     this.positions = _positions;
-    this.fuelFn = _fuelReducer;
-  }
-
-  histogram() {
-    const histogram = {};
-    this.positions.map((p) => {
-      if (histogram[p]) {
-        histogram[p]++;
-      } else {
-        histogram[p] = 1;
-      }
-    });
-    return histogram;
+    this.fuelReducer = _fuelReducer;
   }
   calcFuel(pos) {
-    const distances = this.positions.map((p) => Math.abs(pos - p));
-    const fuel = distances.reduce((a, b) => a + b);
-    return fuel;
+    const fuels = this.positions.map((p) =>
+      this.fuelReducer(Math.abs(pos - p))
+    );
+    const totalFuel = fuels.reduce((a, b) => a + b);
+    return totalFuel;
   }
   max() {
     return Math.max(...this.positions);
   }
   min() {
     return Math.min(...this.positions);
-  }
-  diff() {
-    return this.max() - this.min();
   }
   range() {
     const range = [];
@@ -79,23 +66,20 @@ class CrabOrchestrator {
     });
     return mins;
   }
-  /* These are just for fun */
-  average() {
-    return Math.floor(
-      this.positions.reduce((a, b) => a + b) / this.positions.length
-    );
-  }
-  median() {
-    return this.min() + Math.ceil(this.diff() / 2);
-  }
-  /* End for fun*/
 }
 
-const co1 = new CrabOrchestrator(positions);
-
-console.log(co1.optimize());
+// fuel reducer: 1:1
+const fuelReducer1 = (n) => n;
+const co1 = new CrabOrchestrator(positions, fuelReducer1);
+console.log(co1.optimize((n) => n));
 
 console.log("## PART 2 #####################");
+//           |<---------------------------0
+// 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+// x x x x x o o o o o o  o  o  o  o  o  x
+//           11 10 9 8 7 6 5  4  3  2  1
 
-// x x x x o o o o o o o o o o o o
-// 0 0 0 0 1 2 3 4 5 6 7 8 9 101112
+// fuel reducer: summation
+const fuelReducer2 = (n) => (n ** 2 + n) / 2;
+const co2 = new CrabOrchestrator(positions, fuelReducer2);
+console.log(co2.optimize());
